@@ -38,9 +38,9 @@ NormalizeMatrix <- function(mat, method="scran", min_size=10){
            sce <- SingleCellExperiment(list(counts=mat))
            rm(mat)
            clusters <- quickCluster(sce, min.size=min_size)
-           table(clusters)
+           print(table(clusters))
            sce <- computeSumFactors(sce, cluster=clusters, positive=TRUE)
-           summary(sizeFactors(sce))
+           print(summary(sizeFactors(sce)))
            sce <- normalize(sce)
            mat.norm <- logcounts(sce)
          },

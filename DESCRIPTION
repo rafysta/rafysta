@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "rafysta@gmail.com")
 Description: Private functions for efficient work
-License: What license it uses
+License: MIT
 Imports: dplyr
 Encoding: UTF-8
 LazyData: true
