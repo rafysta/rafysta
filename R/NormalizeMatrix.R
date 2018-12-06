@@ -112,4 +112,5 @@ NormalizeMatrix <- function(mat, method="scran", min_size=10){
            q()
          }
   )
+  mat.norm
 }
