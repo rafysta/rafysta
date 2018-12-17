@@ -3,6 +3,7 @@
 export(Clustering_PCA)
 export(Clustering_SIMILR)
 export(Clustering_tSNE)
+export(Filter_PCA)
 export(NormalizeMatrix)
 export(plot_PCA)
 export(plot_SIMILR)

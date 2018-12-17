@@ -21,6 +21,10 @@ Clustering_PCA <- function(DATA, genes=NULL, cells=NULL, pca_max = 30){
   if(!is.null(genes)){
     mat <- mat[genes,]
   }
+
+  if(!is.null(cells)){
+    mat <- mat[,cells]
+  }
   mat <- t(mat)
   pca <- prcomp(mat, scale=FALSE, tol = 0, rank. = pca_max)
   pca
@@ -37,6 +41,7 @@ RemoveOutlier <- function(x){
 #' @param pca pca object from Clustering_PCA
 #' @param file if set file name, output which cells were removed.
 #' @return vector of cell names
+#' @export
 #' @examples
 #' Filter_PCA(pca, file="output.png")
 Filter_PCA <- function(pca, t_outlier=20, file=NULL){
