@@ -137,9 +137,8 @@ plot_PCA <- function(pca, file=NULL, legend_file=NULL, title=NULL, Xcom=1, Ycom=
   }
   if(!is.null(file)){
     save_plot(file, p + theme(legend.position="none"), base_height = height, base_width = width)
-  }else{
-    p
   }
+  p
 }
 
 
@@ -237,9 +236,8 @@ plot_tSNE <- function(tsne, file=NULL, legend_file=NULL, title=NULL,  cell_table
   }
   if(!is.null(file)){
     save_plot(file, p + theme(legend.position="none"), base_height = height, base_width = width)
-  }else{
-    p
   }
+  p
 }
 
 
@@ -266,6 +264,7 @@ Clustering_SIMILR <- function(DATA, pca_use = 1:10, seed=1){
   }else{
     mat <- DATA
   }
+  mat <- t(mat)
 
   ### 上位3位のclusterを出す
   SIM_estimate <- SIMLR_Estimate_Number_of_Clusters(mat, 2:10, cores.ratio = 0)
@@ -273,12 +272,12 @@ Clustering_SIMILR <- function(DATA, pca_use = 1:10, seed=1){
   SIM_estimate <- SIM_estimate %>% filter(min_rank(value) < 4) %>% arrange(desc(value)) %>% pull(cluster_num)
 
   result[["SIM_estimate"]] <- SIM_estimate
-  result[["Cell"]] <- rownames(mat)
+  result[["Cell"]] <- colnames(mat)
 
   i=1
   set.seed(seed)
   for(cluster in SIM_estimate){
-    sim <- SIMLR(X = t(mat), c = cluster)
+    sim <- SIMLR(X = mat, c = cluster)
     colnames(sim$ydata) <- paste0("SIMLR", i, "_", c("X", "Y"))
     if(i==1){
       result[["X"]] <- sim$ydata[,1]
@@ -288,7 +287,6 @@ Clustering_SIMILR <- function(DATA, pca_use = 1:10, seed=1){
       result[["Y"]] <- cbind(result[["Y"]], sim$ydata[,2])
     }
     i <- i+1
-    # df <- data.frame(sim$ydata)
   }
   result
 }
@@ -354,8 +352,7 @@ plot_SIMILR <- function(sim, file=NULL, target=1, legend_file=NULL, title=NULL, 
   }
   if(!is.null(file)){
     save_plot(file, p + theme(legend.position="none"), base_height = height, base_width = width)
-  }else{
-    p
   }
+  p
 }
 
