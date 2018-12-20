@@ -93,7 +93,7 @@ Filter_PCA <- function(pca, t_outlier=20, file=NULL){
 #' @examples
 #' plot_PCA(pca, file="output.png")
 plot_PCA <- function(pca, file=NULL, legend_file=NULL, title=NULL, Xcom=1, Ycom=2, cell_table=NULL, color_by=NULL, shape_by=NULL,
-                     size_by=NULL, width=5, height=5, alpha=0.5, pallete = NULL, option=NULL){
+                     size_by=NULL, width=5, height=5, alpha=0.5, pallete = NULL, option=NULL, le_width = NULL, le_height = 4){
   ### cell_tableはdata.frame
   # Cellというカラムが定義されていること！
   suppressPackageStartupMessages(library(dplyr))
@@ -112,7 +112,7 @@ plot_PCA <- function(pca, file=NULL, legend_file=NULL, title=NULL, Xcom=1, Ycom=
       labs(x=paste("PC", Xcom, " (", format(contribution[Xcom], digits = 3), "%)", sep=""),
            y=paste("PC", Ycom, " (", format(contribution[Ycom], digits = 3), "%)", sep=""), title=title)
   }else{
-    if(length(unique(D_table[,color_by])) < 20){
+    if(length(unique(D_table[,color_by])) < 23){
       if(is.null(pallete)){
         pallete <-c("#00007F", "blue", "#007FFF", "cyan","#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000")
       }
@@ -133,7 +133,7 @@ plot_PCA <- function(pca, file=NULL, legend_file=NULL, title=NULL, Xcom=1, Ycom=
     p <- p + option
   }
   if(!is.null(legend_file)){
-    save_plot(legend_file, get_legend(p))
+    save_plot(legend_file, get_legend(p), base_height = le_height, base_width = le_width)
   }
   if(!is.null(file)){
     save_plot(file, p + theme(legend.position="none"), base_height = height, base_width = width)
@@ -199,7 +199,7 @@ Clustering_tSNE <- function(DATA, pca_use = 1:10, seed=1, perplexity = 20, theta
 #' @examples
 #' plot_tSNE(tsne, file="output.png")
 plot_tSNE <- function(tsne, file=NULL, legend_file=NULL, title=NULL,  cell_table=NULL, color_by=NULL, shape_by=NULL, size_by=NULL,
-                      width=5, height=5, alpha=0.5, pallete = NULL, option=NULL){
+                      width=5, height=5, alpha=0.5, pallete = NULL, option=NULL, le_width = NULL, le_height = 4){
   ### cell_tableはdata.frame
   # Cellというカラムが定義されていること！
   suppressPackageStartupMessages(library(dplyr))
@@ -213,7 +213,7 @@ plot_tSNE <- function(tsne, file=NULL, legend_file=NULL, title=NULL,  cell_table
     p <- ggplot(D_table, aes_string(x="x", y="y", colour=color_by, size=size_by, shape=shape_by, stroke=0)) + geom_point(alpha=alpha) +
       labs(x="tSNE_1", y="tSNE_2", title=title)
   }else{
-    if(length(unique(D_table[,color_by])) < 20){
+    if(length(unique(D_table[,color_by])) < 23){
       if(is.null(pallete)){
         pallete <-c("#00007F", "blue", "#007FFF", "cyan","#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000")
       }
@@ -232,7 +232,7 @@ plot_tSNE <- function(tsne, file=NULL, legend_file=NULL, title=NULL,  cell_table
     p <- p + option
   }
   if(!is.null(legend_file)){
-    save_plot(legend_file, get_legend(p))
+    save_plot(legend_file, get_legend(p), base_height = le_height, base_width = le_width)
   }
   if(!is.null(file)){
     save_plot(file, p + theme(legend.position="none"), base_height = height, base_width = width)
@@ -315,7 +315,7 @@ Clustering_SIMILR <- function(DATA, pca_use = 1:10, seed=1){
 #' @examples
 #' plot_SIMILR(sim, file="output.png")
 plot_SIMILR <- function(sim, file=NULL, target=1, legend_file=NULL, title=NULL,  cell_table=NULL, color_by=NULL, shape_by=NULL, size_by=NULL,
-                      width=5, height=5, alpha=0.5, pallete = NULL, option=NULL){
+                      width=5, height=5, alpha=0.5, pallete = NULL, option=NULL, le_width = NULL, le_height = 4){
   ### cell_tableはdata.frame
   # Cellというカラムが定義されていること！
   suppressPackageStartupMessages(library(dplyr))
@@ -329,7 +329,7 @@ plot_SIMILR <- function(sim, file=NULL, target=1, legend_file=NULL, title=NULL, 
     p <- ggplot(D_table, aes_string(x="x", y="y", colour=color_by, size=size_by, shape=shape_by, stroke=0)) + geom_point(alpha=alpha) +
       labs(x="SIMILR_1", y="SIMILR_2", title=title)
   }else{
-    if(length(unique(D_table[,color_by])) < 20){
+    if(length(unique(D_table[,color_by])) < 23){
       if(is.null(pallete)){
         pallete <-c("#00007F", "blue", "#007FFF", "cyan","#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000")
       }
@@ -348,7 +348,7 @@ plot_SIMILR <- function(sim, file=NULL, target=1, legend_file=NULL, title=NULL, 
     p <- p + option
   }
   if(!is.null(legend_file)){
-    save_plot(legend_file, get_legend(p))
+    save_plot(legend_file, get_legend(p), base_height = le_height, base_width = le_width)
   }
   if(!is.null(file)){
     save_plot(file, p + theme(legend.position="none"), base_height = height, base_width = width)
