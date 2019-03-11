@@ -224,7 +224,7 @@ plot_tSNE <- function(tsne, file=NULL, legend_file=NULL, title=NULL,  cell_table
     }else{
       mid <- median(D_table[,color_by], na.rm = TRUE)
       p <- ggplot(D_table, aes_string(x="x", y="y", colour=color_by, size=size_by, shape=shape_by, stroke=0)) + geom_point(alpha=alpha) +
-        scale_color_gradient2(midpoint=mid, low="blue", mid="grey90",　high="red", space ="Lab" )+
+        scale_color_gradient2(midpoint=mid, low="blue", mid="grey60",　high="red", space ="Lab" )+
         labs(x="tSNE_1", y="tSNE_2", title=title)
     }
   }

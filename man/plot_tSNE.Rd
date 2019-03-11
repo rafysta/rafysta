@@ -7,7 +7,7 @@
 plot_tSNE(tsne, file = NULL, legend_file = NULL, title = NULL,
   cell_table = NULL, color_by = NULL, shape_by = NULL,
   size_by = NULL, width = 5, height = 5, alpha = 0.5,
-  pallete = NULL, option = NULL)
+  pallete = NULL, option = NULL, le_width = NULL, le_height = 4)
 }
 \arguments{
 \item{tsne}{result from Clustering_tSNE}
